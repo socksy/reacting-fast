@@ -15,3 +15,13 @@ infiniteScroll(DOMElement, DataRepresentation, getFakeData)
 ```
 Where `DOMElement` is the element in which the infinite scroll area is loaded, DataRepresentation is a ReactJS representation
 of how a single data point should be rendered, and getFakeData is the data fetching method.
+
+Requirements
+==============
+You need browserify, ReactJS, and react-tools (in particular, the jsx compiler).
+
+    # npm install -g react react-tools browserify
+
+Then the provided Makefile should work, producing bundle.js.
+
+When exploring the repo, you'd be best to avoid bundle.js, as it *will* slow your browser.
