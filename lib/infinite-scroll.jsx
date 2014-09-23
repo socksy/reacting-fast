@@ -12,6 +12,10 @@ module.exports = function(where, Datum, getFakeData) {
             var returnedData = null;
             getFakeData(currentBase, currentStep, 
                         function(err, data) {
+                            //not pretty, but not worth expanding on atm
+                            if (err) {
+                                return null;
+                            }
                             returnedData = data;
                         });
             currentBase += currentStep;

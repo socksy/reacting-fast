@@ -18,6 +18,9 @@ function getFakeData(offset, limit, callback) {
 };
  
 //the JSX representation of a single point, easily changed
+//Has access to this.props.name, and this.props.children,
+//the latter being the description in this implementation.
+//TODO: make this mord flexible
 var Datum = React.createClass({displayName: 'Datum',
     render: function() {
         return (
@@ -32,5 +35,9 @@ var Datum = React.createClass({displayName: 'Datum',
 });
 
 window.onload = function() {
+    //Takes 
+    //- a DOM element where to render the list
+    //- a React JSX element as to how to render each item
+    //- the function for getting data, assuming an offset, limit and callback
     infscroll(document.getElementById('list'), Datum, getFakeData);
 }
