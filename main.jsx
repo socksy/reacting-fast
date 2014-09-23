@@ -57,7 +57,6 @@ var DataBox = React.createClass({
         //inner height is visible area
         //want threshold to be when the top is a page and a bit away from the end
         var threshold = node.scrollHeight - (window.innerHeight * 1.1);
-        console.log(threshold + ' ' + window.scrollY)
         if (window.scrollY > threshold) {
             this.setState({data: this.state.data.concat(newData())});
         }
