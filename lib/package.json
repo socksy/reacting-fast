@@ -2,7 +2,7 @@
   "name": "infinite-scroll",
   "version": "0.0.3",
   "description": "",
-  "main": "script.js",
+  "main": "infinite-scroll.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
