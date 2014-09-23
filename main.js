@@ -31,4 +31,6 @@ var Datum = React.createClass({displayName: 'Datum',
     }
 });
 
-infscroll(document.getElementByID('list'), Datum, getFakeData);
+window.onload = function() {
+    infscroll(document.getElementById('list'), Datum, getFakeData);
+}

@@ -40,7 +40,7 @@ module.exports = function(where, Datum, getFakeData) {
         render: function() {
             var dataList = this.state.data.map(function(dataPoint) {
                 return (
-                    <Datum name={dataPoint.name}>        
+                    <Datum key={dataPoint.id} name={dataPoint.name}>        
                     {dataPoint.description}
                     </Datum>
                );

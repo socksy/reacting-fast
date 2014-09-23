@@ -41,7 +41,7 @@ module.exports = function(where, Datum, getFakeData) {
         render: function() {
             var dataList = this.state.data.map(function(dataPoint) {
                 return (
-                    Datum({name: dataPoint.name}, 
+                    Datum({key: dataPoint.id, name: dataPoint.name}, 
                     dataPoint.description
                     )
                );
@@ -100,7 +100,9 @@ var Datum = React.createClass({displayName: 'Datum',
     }
 });
 
-infscroll(document.getElementByID('list'), Datum, getFakeData);
+window.onload = function() {
+    infscroll(document.getElementById('list'), Datum, getFakeData);
+}
 
 },{"./lib/infinite-scroll.js":1,"react":146}],3:[function(require,module,exports){
 /**
