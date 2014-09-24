@@ -13,8 +13,9 @@ function getFakeData(offset, limit, callback) {
       description: "Description " + id
     });
   }
-
-  callback(null, data);
+  setTimeout(function(){ // <- first version was missing this timeout
+      callback(null, data);
+  }, 0)
 };
  
 //the JSX representation of a single point, easily changed

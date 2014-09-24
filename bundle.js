@@ -9,18 +9,11 @@ module.exports = function(where, Datum, getFakeData) {
     var newData = (function() {
         currentBase = 1;
         currentStep = 10;
-        return function () {
+        return function (callback) {
             var returnedData = null;
             getFakeData(currentBase, currentStep, 
-                        function(err, data) {
-                            //not pretty, but not worth expanding on atm
-                            if (err) {
-                                return null;
-                            }
-                            returnedData = data;
-                        });
+                        function(err, data) {callback(err, data)});
             currentBase += currentStep;
-            return returnedData;
         }
     })();
 
@@ -30,6 +23,13 @@ module.exports = function(where, Datum, getFakeData) {
         componentDidMount: function() {
             window.addEventListener('scroll', this.updateListener);
         },
+
+        updateWithNewData: function(err, newData) {
+            if (err) {
+                return;
+            }
+            this.setState({data: this.state.data.concat(newData)});
+        },
         
         updateListener: function() {
             var node = this.getDOMNode();
@@ -38,7 +38,7 @@ module.exports = function(where, Datum, getFakeData) {
             //want threshold to be when the top is a page and a bit away from the end
             var threshold = node.scrollHeight - (window.innerHeight * 1.1);
             if (window.scrollY > threshold) {
-                this.setState({data: this.state.data.concat(newData())});
+                newData(this.updateWithNewData);
             }
         },
 
@@ -58,7 +58,8 @@ module.exports = function(where, Datum, getFakeData) {
         },
 
         getInitialState: function() {
-            return {data: newData()};
+            newData(this.updateWithNewData);
+            return {data: []};
         }
 
     });
@@ -86,8 +87,9 @@ function getFakeData(offset, limit, callback) {
       description: "Description " + id
     });
   }
-
-  callback(null, data);
+  setTimeout(function(){ // <- first version was missing this timeout
+      callback(null, data);
+  }, 0)
 };
  
 //the JSX representation of a single point, easily changed
